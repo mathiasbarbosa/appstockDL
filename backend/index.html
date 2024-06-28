@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEstor de Stock</title>
+</head>
+
+<body>
+  <h1>Gestor de Stock</h1>
+  <main id="root">
+
+  </main>
+</body>
+
+<script>
+  const getData = async () => {
+    const res = await fetch('http://localhost:4000/api/productos')
+    const data = await res.json()
+    document.getElementById('root').innerHTML = ''
+    data.map(p => {
+      const product = document.createElement('div')
+      product.innerHTML = `
+      <h2>${p.nombre}</h2>
+      <p>Precio: ${p.precio}</p>
+      <p>Stock: ${p.stock}</p>
+    `
+      document.getElementById('root').append(product)
+    })
+  }
+
+  getData()
+</script>
+
+</html>
